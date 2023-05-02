@@ -47,7 +47,8 @@ VALUES
   ('https://tyrique.info', 4),
   ('http://buddy.info', 5),
   ('https://elinore.name', 2),
-  ('http://sasha.com', 3);
+  ('http://sasha.com', 3),
+  ('http://nullibus.com', NULL);
 
 INSERT INTO comment (contents, user_id, photo_id)
 VALUES
@@ -152,18 +153,30 @@ VALUES
   ('Molestiae officia architecto eius nesciunt.', 5, 4),
   ('Minima dolorem reiciendis excepturi culpa sapiente eos deserunt ut.', 3, 3);
 
-SELECT
-  c.contents, u.username
-FROM
-  comment c
-JOIN "user" u ON c.user_id = u.id;
+-- SELECT
+--   c.contents, u.username
+-- FROM
+--   comment c
+-- JOIN "user" u ON c.user_id = u.id;
+--
+-- SELECT c.contents, p.url
+-- FROM comment c
+-- JOIN public.photo p ON p.id = c.photo_id;
+--
+-- EXPLAIN ANALYSE SELECT url, contents, username
+-- FROM comment c
+-- JOIN photo p ON c.photo_id = p.id
+-- JOIN "user" u ON u.id = c.user_id AND u.id = p.user_id
+-- WHERE c.user_id = p.user_id;
+--
+-- SELECT c.photo_id, COUNT(c.id)
+-- FROM comment c
+-- GROUP BY c.photo_id;
+--
+-- SELECT photo_id, count(*)
+-- from comment
+-- where photo_id < 3
+-- GROUP BY photo_id
+-- HAVING count(*) > 2;
 
-SELECT c.contents, p.url
-FROM comment c
-JOIN public.photo p ON p.id = c.photo_id;
-
-EXPLAIN ANALYSE SELECT url, contents, username
-FROM comment c
-JOIN photo p ON c.photo_id = p.id
-JOIN "user" u ON u.id = c.user_id AND u.id = p.user_id
-WHERE c.user_id = p.user_id;
+DROP TABLE comment, photo, "user";

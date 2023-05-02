@@ -13,3 +13,6 @@ stop name=container_name:
 psql name=container_name:
     docker exec -u postgres -it {{name}} psql
 
+restore name=container_name:
+    cat 176.sql | docker exec -u postgres -i {{name}} pg_restore --dbname=postgres --single-transaction --no-owner --disable-triggers
+

@@ -10,6 +10,9 @@ start name=container_name:
 stop name=container_name:
     docker kill {{name}}
 
+shell name=container_name:
+    docker exec -u postgres -it {{name}} bash
+
 psql name=container_name:
     docker exec -u postgres -it {{name}} psql
 
